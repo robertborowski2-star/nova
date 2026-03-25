@@ -294,11 +294,15 @@ class Agent:
                 # If this looks like a portfolio report, save it
                 if any(kw in user_message.lower() for kw in
                        ["brief", "report", "review", "portfolio", "stocks"]):
+                    message_lower = user_message.lower()
                     mode = "weekly"
-                    if "quarterly" in user_message.lower():
+                    if "quarterly" in message_lower:
                         mode = "quarterly"
-                    elif "monthly" in user_message.lower():
+                    elif "monthly" in message_lower:
                         mode = "monthly"
+                    elif any(phrase in message_lower for phrase in
+                             ["how are my stocks", "check my portfolio", "what's moving", "daily check"]):
+                        mode = "daily"
                     self.memory.save_report(mode, final_response)
 
                 break

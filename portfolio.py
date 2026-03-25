@@ -113,6 +113,7 @@ def build_analysis_prompt(market_data: list[dict], mode: str = "weekly") -> str:
     data_block = json.dumps(market_data, indent=2, default=str)
 
     mode_instructions = {
+        "daily":     "DAILY SNAPSHOT — prices and day % change only. Flag anything moving more than 2% today with a brief one-line reason if available. No macro commentary, no news summary. Table format only, under 150 words.",
         "weekly":    "WEEKLY PULSE — tight snapshot, material changes, red flags. ~400 words.",
         "monthly":   "MONTHLY REVIEW — sector themes, macro backdrop, positioning. ~600 words.",
         "quarterly": "QUARTERLY REVIEW — full allocation analysis, retirement trajectory, "
