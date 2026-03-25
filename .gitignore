@@ -1,0 +1,6 @@
+.env
+*.db
+__pycache__/
+nova.log
+*.pyc
+.DS_Store
