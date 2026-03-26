@@ -149,6 +149,7 @@ python main.py
 | `/start` | Show Nova's status and memory stats |
 | `/memory` | See everything Nova remembers about you |
 | `/forget category key` | Delete a specific fact (e.g. `/forget portfolio risk_tolerance`) |
+| `/help` | Show all available commands and trigger phrases |
 
 ## Trigger phrases
 
@@ -160,7 +161,9 @@ Send any of these as a normal message (not a command):
 | `monthly review` | Monthly sector/macro review with positioning notes (~600 words) |
 | `quarterly review` | Full allocation analysis, retirement trajectory, currency exposure (~900 words) |
 | `research EQB` | Single-ticker deep dive — valuation, news, analyst consensus (~500 words) |
-| `how are my stocks` | Weekly pulse (same as weekly brief) |
+| `how are my stocks` | Daily snapshot — current prices and day % change only, flags anything moving more than 2% |
+| `what's moving` | Daily snapshot (same as above) |
+| `daily check` | Daily snapshot (same as above) |
 | Anything else | Nova answers using web search + her memory of you |
 
 ---
