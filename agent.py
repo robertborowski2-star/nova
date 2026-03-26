@@ -26,7 +26,7 @@ from portfolio import fetch_market_data, load_holdings, build_analysis_prompt
 log = logging.getLogger("nova.agent")
 
 MODEL = "claude-sonnet-4-6"
-MAX_TOKENS = 2000
+MAX_TOKENS = 8000
 MAX_TOOL_LOOPS = 5  # safety cap — prevents runaway tool calling
 
 
