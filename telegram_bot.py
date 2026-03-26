@@ -64,12 +64,20 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(response, parse_mode="Markdown")
     else:
         # Split on double newline to avoid cutting mid-sentence
-        chunks = split_message(response, limit=4000)
+        chunks = split_message(response, limit=3000)
         for i, chunk in enumerate(chunks):
             prefix = f"*({i+1}/{len(chunks)})*\n\n" if len(chunks) > 1 else ""
-            await update.message.reply_text(
-                prefix + chunk, parse_mode="Markdown"
-            )
+            for attempt in range(3):
+                try:
+                    await update.message.reply_text(
+                        prefix + chunk, parse_mode="Markdown"
+                    )
+                    break
+                except Exception:
+                    if attempt == 2:
+                        await update.message.reply_text(
+                            prefix + chunk, parse_mode=None
+                        )
 
 
 async def handle_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
