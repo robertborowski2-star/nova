@@ -122,6 +122,34 @@ async def handle_forget(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
 
 
+async def handle_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Handle /help command — show command reference."""
+    if not is_authorised(update):
+        return
+    await update.message.reply_text(
+        "*Nova — Command Reference*\n\n"
+        "*Scheduled Reports*\n"
+        "• `weekly brief` — full weekly portfolio pulse\n"
+        "• `monthly review` — sector & macro analysis\n"
+        "• `quarterly review` — full allocation + retirement review\n\n"
+        "*Quick Checks*\n"
+        "• `how are my stocks` — daily price snapshot\n"
+        "• `research TICKER` — single stock deep dive\n"
+        "• `what's moving` — daily snapshot\n\n"
+        "*Memory*\n"
+        "• `/memory` — see everything Nova remembers\n"
+        "• `/forget category key` — delete a specific memory\n\n"
+        "*General*\n"
+        "• Ask Nova anything — she'll search the web\n"
+        "• Tell Nova things — she remembers them automatically\n\n"
+        "*Auto Reports*\n"
+        "• Monday 8am — weekly pulse\n"
+        "• 1st of month 8am — monthly review\n"
+        "• Jan/Apr/Jul/Oct 1st — quarterly review",
+        parse_mode="Markdown"
+    )
+
+
 def split_message(text: str, limit: int = 4000) -> list[str]:
     """Split a long message into chunks without cutting mid-paragraph."""
     if len(text) <= limit:
@@ -170,6 +198,7 @@ def start_bot_sync():
         raise ValueError("TELEGRAM_CHAT_ID not set in .env")
     app = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
     app.add_handler(CommandHandler("start", handle_start))
+    app.add_handler(CommandHandler("help", handle_help))
     app.add_handler(CommandHandler("memory", handle_memory))
     app.add_handler(CommandHandler("forget", handle_forget))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
